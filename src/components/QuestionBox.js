@@ -2,7 +2,7 @@
 
 const QuestionBox = ( {question, options, selectedOption, correction} ) => {       // question,options - props
   const [answer, setAnswer] = useState(options);        // Hooks
-  console.log(correction);
+  // console.log(correction);
   
   return(
     <div className="questionBox">
@@ -18,19 +18,7 @@ const QuestionBox = ( {question, options, selectedOption, correction} ) => {    
             selectedOption(x)
             }
           }
-
       > {x} </button> )}
-
-
-      {/* {correction.map( (y , index) => {
-        return(
-        <h3 
-        key={index}
-        > {" Oops ! Correct Answer Was" + " " } {y} </h3> )
- 
-      })
-     } */}
-
   </div>
 
   )
