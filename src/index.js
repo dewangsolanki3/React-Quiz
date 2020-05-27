@@ -11,10 +11,10 @@ class Quizapp extends Component {
     constructor(){
         super();
         this.state = {
-            questionBank : [],    // done
+            questionBank : [],
             score: 0,
             responses: 0,
-            token: null,
+            // token: null,  
             // abcCorrect:[]
         }
     }
@@ -32,28 +32,24 @@ class Quizapp extends Component {
 
     computeScore = (selectedAns , correctAns) => {
         if( selectedAns === correctAns ){
-            
             this.setState({
                 score :  this.state.score + 1  ,
-                token: true
+                // token: true
             }) 
-            console.log('bravo');
-             
+            console.log('bravo');           
         }
 
-        else{
-            this.setState({
-                token : false ,
-                // abcCorrect : this.state.abcCorrect.concat(correctAns) 
-            }) 
-     
-        }
+        // else{
+        //     this.setState({
+        //         // token : false ,
+        //         // abcCorrect : this.state.abcCorrect.concat(correctAns) 
+        //     }) 
+        // }
 
         this.setState({
-            responses: this.state.responses < 5 ? this.state.responses + 1 : 5
+            responses: this.state.responses < 5 ? this.state.responses + 1 : 5    // Ternary optional =======================
         })
         console.log(this.state.responses)
-        
     }
 
 
@@ -61,8 +57,8 @@ class Quizapp extends Component {
         this.setState({
             score : 0 ,
             responses: 0 ,
-            abcCorrect: [],
-            token:null
+            // abcCorrect: [],
+            // token:null
         })
         this.getQuestions();
     }
@@ -79,21 +75,16 @@ class Quizapp extends Component {
                 <div className="title"> QuizApp </div>
                 
                 {this.state.responses < 5 && this.state.questionBank.map(
-                    ( {question,answers,correct,questionId} = this.qBank ) => 
+                    // ( {question,answers,correct,questionId} = this.qBank ) => 
+                    ( set ) => 
                     ( <ClassQuestion 
-                        question={question}
-                        options={answers} 
-                        key={questionId} 
-                        selectedOption = { (x) => this.computeScore(x , correct)  }
+                        question={set.question}
+                        options={set.answers} 
+                        key={set.questionId} 
+                        selectedOption = { (x) => this.computeScore(x , set.correct)  }
                         // correction = {this.state.abcCorrect} 
                         />
-                    )
-                        
-                        
-                    // OR YOU CAN SIMPLY USE h4 TAG INSTEAD OF <ClassQuestion/> -
-                    /* <h4 key={questionId} >{question}</h4> */
-/* You cannot use key as index bcz here the data is an Object with 4 keys ./components/ClassQuestion.js  */
-                                            
+                    )                                          
                     )
                     
                 }   

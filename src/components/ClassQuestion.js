@@ -3,33 +3,37 @@ import React, { Component } from 'react';
 class ClassQuestion extends Component {
 
     state = {
-        answer : this.props.options,
+        option : this.props.options,     // Renamed answer as option  =============
+        disable : false
         // selectedOptions : this.props.selectedOptions    -============No nned =======
     }
 
     setAnswer = (e) => {
         this.setState({
-            answer : [e.target.innerText],
+            option : [e.target.innerText],
+            disable : true
         })
-
         this.props.selectedOption(e.target.innerText)
     }
 
-    render() {
-        console.log("Dewang" ,this.state.answer)
-        return (
-            <div className="questionBox">
+render() {
+    console.log(this.state.answer)
+console.log("Dewang" ,this.state.option)
+return (
+    <div className="questionBox">
+    
     <div className ="question">
-      {this.props.question}
+        {this.props.question}
     </div>
-    {this.state.answer.map( (x, index) => 
-      <button 
-          key={index}               // Just a key
-          className="answerBtn"     // Just a CSS
-          onClick = {this.setAnswer}
-      > {x} </button> )}
+    {this.state.option.map( (x, index) => 
+        <button 
+            key={index}               // Just a key
+            className="answerBtn"     // Just a CSS
+            onClick = {this.setAnswer}
+            disabled = {this.state.disable}
+        > {x} </button> )}
 
-  </div>
+    </div>
 
   )
 
